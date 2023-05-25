@@ -1,7 +1,7 @@
 import React from "react";
 import { useLayoutEffect } from "react";
 import { MEALS, CATEGORIES } from "../data/dummy-data";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, ScrollView } from "react-native";
 import MealTile from "../components/MealTile";
 
 const MealsOverview = ({ route, navigation }) => {
@@ -24,7 +24,7 @@ const MealsOverview = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.mealContainer}>
         <FlatList
           data={selectedMeals}
@@ -32,7 +32,7 @@ const MealsOverview = ({ route, navigation }) => {
           renderItem={renderMealItem}
         />
       </View>
-    </View>
+    </ScrollView>
 
     // <View style={styles.container}>
     //   <Text>Meals Overview Screen</Text>
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   mealContainer: {
     padding: 16,
     backgroundColor: "#ccc",
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },

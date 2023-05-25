@@ -10,21 +10,7 @@ import {
 import { MEALS } from "../data/dummy-data";
 import IconButton from "./IconButton";
 
-const SingleMeal = ({ route, navigation }) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return <IconButton title='Tap Me!' handlePress={handlePress} />;
-      },
-    });
-  }, [navigation, handlePress]);
-
-  const handlePress = () => {
-    navigation.navigate("MealsCategories");
-  };
-
-  const { mealId, color } = route.params;
-
+const SingleMeal = ({ mealId, color }) => {
   const meal = MEALS.find((meal) => meal.id === mealId);
 
   const {
@@ -42,39 +28,35 @@ const SingleMeal = ({ route, navigation }) => {
   } = meal;
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.mealContainer}>
-          <View style={[styles.mealCard, { backgroundColor: color }]}>
-            <Text style={styles.title}>{title}</Text>
-            <Image source={imageUrl} style={styles.image} />
-            <View style={[styles.subContainer, , { backgroundColor: color }]}>
-              <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>{complexity}</Text>
-                <Text style={styles.headerText}>{affordability}</Text>
-                <Text style={styles.headerText}>Only {duration}m</Text>
-              </View>
-              <View style={styles.infoContainer}>
-                <View style={styles.ingredients}>
-                  <Text style={styles.title}>ingredients</Text>
-                  {ingredients.map((ingredient) => (
-                    <Text key={ingredient}>{ingredient}</Text>
-                  ))}
-                </View>
-                <View style={styles.steps}>
-                  <Text style={styles.title}>Directions</Text>
-                  {steps.map((step, index) => (
-                    <Text key={index}>
-                      {index + 1}: {step}
-                    </Text>
-                  ))}
-                </View>
-              </View>
+    <View style={styles.container}>
+      <View style={[styles.mealCard, { backgroundColor: color }]}>
+        <Text style={styles.title}>{title}</Text>
+        <Image source={imageUrl} style={styles.image} />
+        <View style={[styles.subContainer, , { backgroundColor: color }]}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>{complexity}</Text>
+            <Text style={styles.headerText}>{affordability}</Text>
+            <Text style={styles.headerText}>Only {duration}m</Text>
+          </View>
+          <View style={styles.infoContainer}>
+            <View style={styles.ingredients}>
+              <Text style={styles.title}>ingredients</Text>
+              {ingredients.map((ingredient) => (
+                <Text key={ingredient}>{ingredient}</Text>
+              ))}
+            </View>
+            <View style={styles.steps}>
+              <Text style={styles.title}>Directions</Text>
+              {steps.map((step, index) => (
+                <Text key={index}>
+                  {index + 1}: {step}
+                </Text>
+              ))}
             </View>
           </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -83,13 +65,6 @@ export default SingleMeal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ccc",
-  },
-
-  mealContainer: {
-    height: "100vh",
   },
 
   mealCard: {
@@ -98,7 +73,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 10,
     padding: 20,
-    margin: 30,
+    margin: 20,
     justifyContent: "center",
     alignItems: "center",
   },
