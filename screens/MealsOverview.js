@@ -56,12 +56,14 @@ export default MealsOverview;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#ccc",
   },
 
   mealContainer: {
     padding: 16,
     backgroundColor: "#ccc",
     flex: 1,
+    height: "100vh",
     alignItems: "center",
     justifyContent: "center",
   },
