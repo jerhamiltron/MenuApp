@@ -3,20 +3,24 @@ import SingleMeal from "../components/MealsList/SingleMeal";
 import { View, StyleSheet, ScrollView } from "react-native";
 
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 const SingleMealScreen = ({ route, navigation }) => {
-  const favoriteMealsCtx = useContext(FavoritesContext);
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
 
   const { mealId, color } = route.params;
 
-  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+  const mealIsFavorite = favoriteMealIds.includes(mealId);
 
   const changeFavoriteStatus = () => {
     if (mealIsFavorite) {
-      favoriteMealsCtx.removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
+      // favoriteMealsCtx.removeFavorite(mealId); // context api methods
     } else {
-      favoriteMealsCtx.addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
+      // favoriteMealsCtx.addFavorite(mealId); // context api methods
     }
   };
 
