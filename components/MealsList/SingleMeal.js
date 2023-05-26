@@ -7,10 +7,10 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-import { MEALS } from "../data/dummy-data";
-import IconButton from "./IconButton";
+import { MEALS } from "../../data/dummy-data";
+import IconButton from "../IconButton";
 
-const SingleMeal = ({ mealId, color }) => {
+const SingleMeal = ({ mealId }) => {
   const meal = MEALS.find((meal) => meal.id === mealId);
 
   const {
@@ -29,10 +29,10 @@ const SingleMeal = ({ mealId, color }) => {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.mealCard, { backgroundColor: color }]}>
+      <View style={[styles.mealCard, { backgroundColor: "#1298aa" }]}>
         <Text style={styles.title}>{title}</Text>
         <Image source={imageUrl} style={styles.image} />
-        <View style={[styles.subContainer, , { backgroundColor: color }]}>
+        <View style={styles.subContainer}>
           <View style={styles.headerContainer}>
             <Text style={styles.headerText}>{complexity}</Text>
             <Text style={styles.headerText}>{affordability}</Text>

@@ -1,31 +1,39 @@
-import React, { useLayoutEffect } from "react";
-import SingleMeal from "../components/SingleMeal";
+import React, { useLayoutEffect, useContext } from "react";
+import SingleMeal from "../components/MealsList/SingleMeal";
 import { View, StyleSheet, ScrollView } from "react-native";
 
 import IconButton from "../components/IconButton";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 const SingleMealScreen = ({ route, navigation }) => {
+  const favoriteMealsCtx = useContext(FavoritesContext);
+
   const { mealId, color } = route.params;
+
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
+  const changeFavoriteStatus = () => {
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealId);
+    } else {
+      favoriteMealsCtx.addFavorite(mealId);
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
           <IconButton
-            title='Tap Me!'
-            handlePress={handlePress}
-            icon='ios-information-circle-outline'
+            handlePress={changeFavoriteStatus}
+            icon={mealIsFavorite ? "star" : "star-outline"}
             color='red'
             size={36}
           />
         );
       },
     });
-  }, [navigation, handlePress]);
-
-  const handlePress = () => {
-    navigation.navigate("MealsCategories");
-  };
+  }, [navigation, changeFavoriteStatus]);
 
   return (
     <ScrollView style={styles.container}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import { useNavigation } from "@react-navigation/native";
-import SingleMeal from "./SingleMeal";
+import SingleMeal from "./MealsList/SingleMeal";
 
 const MealTile = ({ meal, categoryId }) => {
   const { id, title, imageUrl, affordability, complexity, duration } =
@@ -15,7 +15,6 @@ const MealTile = ({ meal, categoryId }) => {
   const renderMeal = () => {
     navigation.navigate("Meal", {
       mealId: id,
-      color: color,
     });
 
     // const mealInfo = {
@@ -38,17 +37,11 @@ const MealTile = ({ meal, categoryId }) => {
     }
   };
 
-  const { color } = CATEGORIES.find((category) => {
-    if (category.id === categoryId) {
-      return category.color;
-    }
-  });
-
   return (
     <Pressable
       style={(state) => [
         styles.container,
-        { backgroundColor: color },
+        { backgroundColor: "#1298aa" },
         state.hovered && styles.onHover,
       ]}
       onHoverIn={() => handleEvent("hovered")}
